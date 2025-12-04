@@ -5,7 +5,7 @@ const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 const userSchema = new Schema(
   {
-    name: {
+    username: {
       type: String,
       required: [true, "Name is required"],
     },

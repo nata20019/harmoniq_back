@@ -24,4 +24,9 @@ const articleSchema = new Schema(
   { versionKey: false, timestamps: true }
 );
 
+articleSchema.post("save", function (error, doc, next) {
+  error.status = 409;
+  next();
+});
+
 export const Article = model("article", articleSchema);

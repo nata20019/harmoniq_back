@@ -21,6 +21,7 @@ export const getAllArticles = async (req, res, next) => {
 export const getOneArticle = async (req, res, next) => {
   try {
     const { id } = req.params;
+    console.log("Це id статті:", id);
     const { _id: owner } = req.user;
     const article = await Article.findOne({ _id: id, owner });
     if (!article) {
@@ -53,6 +54,7 @@ export const deleteArticle = async (req, res, next) => {
 export const createArticle = async (req, res, next) => {
   try {
     const { _id: owner } = req.user;
+    console.log("Створюємо статтю для користувача:", owner);
     const newArticle = await Article.create({ ...req.body, owner });
     res.json({ status: 201, data: { newArticle } });
   } catch (error) {
