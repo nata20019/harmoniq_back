@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import { handleSaveError } from "./hooks.js";
+
 const { Schema, model } = mongoose;
 
 const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -32,5 +34,7 @@ const userSchema = new Schema(
   },
   { versionKey: false, timestamps: true }
 );
+
+userSchema.post("save", handleSaveError);
 
 export const User = model("user", userSchema);

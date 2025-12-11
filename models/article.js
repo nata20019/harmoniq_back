@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import { handleSaveError } from "./hooks.js";
+
 const { Schema, model } = mongoose;
 
 const articleSchema = new Schema(
@@ -20,13 +22,15 @@ const articleSchema = new Schema(
       type: String,
       required: true,
     },
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
+    },
   },
   { versionKey: false, timestamps: true }
 );
 
-articleSchema.post("save", function (error, doc, next) {
-  error.status = 409;
-  next();
-});
+articleSchema.post("save", handleSaveError);
 
 export const Article = model("article", articleSchema);

@@ -50,7 +50,6 @@ const registerUser = async (req, res) => {
     res.status(201).json({
       username: newUser.username,
       email: newUser.email,
-      subscription: newUser.subscription,
       avatarURL: newUser.avatarURL,
     });
   } catch (error) {
@@ -110,13 +109,13 @@ const loginUser = async (req, res) => {
   await User.findByIdAndUpdate(user._id, { token });
   res.json({
     token,
-    user: { email: user.email, subscription: user.subscription },
+    user: { email: user.email },
   });
 };
 
 const getCurrent = async (req, res) => {
-  const { email, subscription } = req.user;
-  res.json({ email, subscription });
+  const { email } = req.user;
+  res.json({ email });
 };
 
 const logout = async (req, res) => {

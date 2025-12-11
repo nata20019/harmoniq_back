@@ -17,8 +17,12 @@ app.use(express.static("public"));
 
 app.use("/api/auth", authRouter);
 app.use("/api/users", usersRouter);
-app.use("/api/articles", articlesRouter);
+app.use("/api/articles", (req, res) => {
+  console.log(req);
+  res.send("Articles router is working");
+});
 
+app.use("/api/articles", articlesRouter);
 app.use((_, res) => {
   res.status(404).json({ message: "Route not found" });
 });
