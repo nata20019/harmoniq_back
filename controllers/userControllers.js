@@ -11,6 +11,7 @@ export const updateUserAvatar = async (req, res, next) => {
   }
 
   const { _id } = req.user;
+  console.log("req.file:", req.file);
   const { path: oldPath, originalname } = req.file;
   const filename = req.file.filename || originalname;
   const newPath = path.join(AVATARS_PATH, filename);
