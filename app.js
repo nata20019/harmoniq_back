@@ -2,16 +2,20 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 import "dotenv/config";
-import "./server.js";
 import authRouter from "./routes/authRouter.js";
 import usersRouter from "./routes/usersRouter.js";
 import articlesRouter from "./routes/articlesRouter.js";
+import e from "express";
 
-const { PORT = 3000 } = process.env;
+const { PORT = 5000 } = process.env;
 const app = express();
 
 app.use(morgan("tiny"));
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Порт, на якому працює ваш React
+  }),
+);
 app.use(express.json());
 app.use(express.static("public"));
 
@@ -30,3 +34,5 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+export default app;

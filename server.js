@@ -1,11 +1,15 @@
+import "dotenv/config";
 import mongoose from "mongoose";
+import app from "./app.js";
 
-const DB_HOST = process.env.DB_HOST;
+const { DB_HOST, PORT = 5000 } = process.env;
 
 mongoose
   .connect(DB_HOST)
   .then(() => {
-    console.log(`Server is running. Use our API on port: ${process.env.PORT}`);
+    app.listen(PORT, () => {
+      console.log(`Server is running. Use our API on port: ${PORT}`);
+    });
   })
   .catch((error) => {
     console.log(error.message);
