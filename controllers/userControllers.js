@@ -24,12 +24,15 @@ export const updateUserAvatar = async (req, res, next) => {
     await fs.unlink(oldPath);
     // await fs.rename(oldPath, newPath);
 
-    const avatarURL = path.join("avatars", filename);
+    // Замість цього:
+    // const avatarURL = path.join("avatars", filename);
+
+    const avatarURL = `avatars/${filename}`;
 
     const newUser = await User.findByIdAndUpdate(
       _id,
       { avatarURL },
-      { new: true }
+      { new: true },
     );
     if (!newUser) {
       throw HttpError(404, "User not found");
@@ -40,6 +43,17 @@ export const updateUserAvatar = async (req, res, next) => {
     });
   } catch (error) {
     await fs.unlink(oldPath).catch((err) => console.log(err));
+    next(error);
+  }
+};
+
+export const getUsers = async (req, res, next) => {
+  try {
+    // Шукаємо всіх користувачів, але вибираємо ТІЛЬКИ ім'я, аватар та id
+    const users = await User.find({}, "name avatarURL _id");
+
+    res.json(users);
+  } catch (error) {
     next(error);
   }
 };

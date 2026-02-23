@@ -28,3 +28,7 @@ export const updatePasswordSchema = Joi.object({
   oldPassword: Joi.string().min(8).max(64).required(),
   newPassword: Joi.string().min(8).max(64).required(),
 });
+export const userSchema = Joi.object({
+  avatarURL: Joi.string().uri().required(),
+  username: Joi.string().min(2).max(32).required(),
+});

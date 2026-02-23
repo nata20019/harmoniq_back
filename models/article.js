@@ -5,30 +5,35 @@ const { Schema, model } = mongoose;
 
 const articleSchema = new Schema(
   {
-    name: {
+    title: {
       type: String,
-      required: [true, "Set name for article"],
+      required: [true, "Set title for article"],
     },
-    describe: {
+    description: {
       type: String,
       required: [true, "Set description for article"],
     },
-    photoURL: String,
+
     data: {
       type: Date,
-      required: true,
-    },
-    author: {
-      type: String,
-      required: true,
+      required: false,
     },
     owner: {
       type: Schema.Types.ObjectId,
       ref: "user",
       required: true,
     },
+    category: {
+      type: String,
+      default: "General",
+    },
+    favorite: {
+      type: Boolean,
+      default: false,
+    },
+    image: { type: String, default: "" },
   },
-  { versionKey: false, timestamps: true }
+  { versionKey: false, timestamps: true },
 );
 
 articleSchema.post("save", handleSaveError);

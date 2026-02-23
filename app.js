@@ -13,7 +13,8 @@ const app = express();
 app.use(morgan("tiny"));
 app.use(
   cors({
-    origin: "http://localhost:3000", // Порт, на якому працює ваш React
+    origin: "http://localhost:3000",
+    credentials: true, // Дозволяє надсилати куки
   }),
 );
 app.use(express.json());
