@@ -18,7 +18,7 @@ export const getAllArticles = async (req, res, next) => {
     const articles = await Article.find(filter, "-createdAt -updatedAt", {
       skip,
       limit,
-    }).populate("owner", "name avatarURL email");
+    }).populate("owner", "username avatarURL email");
     res.json({ status: 200, data: { articles } });
   } catch (error) {
     next(HttpError(500, error.message));
@@ -36,7 +36,7 @@ export const getOneArticle = async (req, res, next) => {
     // щоб будь-хто міг прочитати статтю
     const article = await Article.findById(id).populate(
       "owner",
-      "name avatarURL email",
+      "username avatarURL email",
     );
     if (!article) {
       next(HttpError(404, `Article with id = ${id} not found`));
@@ -134,7 +134,7 @@ export const updateStatusArticle = async (req, res, next) => {
       {
         new: true,
       },
-    ).populate("owner", "name avatarURL email");
+    ).populate("owner", "username avatarURL email");
     if (!updatedArticle) {
       next(HttpError(404, "Article not found"));
     }
@@ -142,4 +142,24 @@ export const updateStatusArticle = async (req, res, next) => {
   } catch (error) {
     next(HttpError(500, error.message));
   }
+};
+
+export const getMyArticles = async (req, res, next) => {
+
+  try {
+    const { _id } = req.user;
+
+    const result = await Article.find({ owner: _id }).populate("owner", "username email");
+
+    res.json({
+      status: "success",
+      code: 200,
+      data: { result }
+    });
+
+  } catch (error) {
+  
+    next(HttpError(500, error.message));
+  }
+
 };

@@ -50,9 +50,15 @@ export const updateUserAvatar = async (req, res, next) => {
 export const getUsers = async (req, res, next) => {
   try {
     // Шукаємо всіх користувачів, але вибираємо ТІЛЬКИ ім'я, аватар та id
-    const users = await User.find({}, "name avatarURL _id");
+    const users = await User.find({}, "username avatarURL _id");
 
-    res.json(users);
+    res.json({
+      status: "success",
+      code: 200,
+      data: {
+        users,
+      },
+    });
   } catch (error) {
     next(error);
   }

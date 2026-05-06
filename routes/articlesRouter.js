@@ -5,6 +5,7 @@ import {
   getAllArticles,
   getOneArticle,
   updateArticle,
+  getMyArticles,
 } from "../controllers/articlesControllers.js";
 import {
   createArticleSchema,
@@ -19,6 +20,8 @@ import upload from "../middlewares/upload.js";
 const articlesRouter = Router();
 
 articlesRouter.get("/", getAllArticles);
+
+articlesRouter.get('/my', authenticate, getMyArticles);
 
 articlesRouter.get("/:id", isValidId, getOneArticle);
 
@@ -37,10 +40,12 @@ articlesRouter.put(
 articlesRouter.post(
   "/",
   authenticate,
-  upload.single("image"), // Тепер поле 'image' у Postman працюватиме
+  upload.single("image"),
   isEmptyBody,
   validateBody(createArticleSchema),
   createArticle,
 );
+
+
 
 export default articlesRouter;

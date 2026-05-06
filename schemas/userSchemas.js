@@ -6,7 +6,6 @@ export const registerSchema = Joi.object({
   username: Joi.string().min(2).max(32).required(),
   email: Joi.string().pattern(emailPattern).max(64).required(),
   password: Joi.string().min(8).max(64).required(),
-  avatarURL: Joi.string().optional(),
 });
 
 export const verifyEmailSchema = Joi.object({
@@ -31,4 +30,7 @@ export const updatePasswordSchema = Joi.object({
 export const userSchema = Joi.object({
   avatarURL: Joi.string().uri().required(),
   username: Joi.string().min(2).max(32).required(),
+  email: Joi.string().pattern(emailPattern).max(64).required(),
+  password: Joi.string().min(8).max(64).required(),
+  _id: Joi.string(),
 });

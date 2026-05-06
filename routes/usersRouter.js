@@ -8,6 +8,7 @@ import { updateUserAvatarSchema } from "../schemas/userSchemas.js";
 const usersRouter = Router();
 
 usersRouter.get("/", getUsers);
+
 usersRouter.patch(
   "/avatars",
   authenticate,

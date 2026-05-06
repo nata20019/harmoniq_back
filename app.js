@@ -5,7 +5,6 @@ import "dotenv/config";
 import authRouter from "./routes/authRouter.js";
 import usersRouter from "./routes/usersRouter.js";
 import articlesRouter from "./routes/articlesRouter.js";
-import e from "express";
 
 const { PORT = 5000 } = process.env;
 const app = express();
