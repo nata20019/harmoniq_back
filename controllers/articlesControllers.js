@@ -149,7 +149,7 @@ export const getMyArticles = async (req, res, next) => {
   try {
     const { _id } = req.user;
 
-    const result = await Article.find({ owner: _id }).populate("owner", "username email");
+    const result = await Article.find({ owner: _id }).populate("owner", "username avatarURL email");
 
     res.json({
       status: "success",

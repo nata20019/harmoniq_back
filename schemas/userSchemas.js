@@ -20,7 +20,7 @@ export const userSigninSchema = Joi.object({
 });
 
 export const updateUserAvatarSchema = Joi.object({
-  avatarURL: Joi.string().uri().required(),
+  avatar: Joi.any(),
 });
 
 export const updatePasswordSchema = Joi.object({
@@ -28,7 +28,7 @@ export const updatePasswordSchema = Joi.object({
   newPassword: Joi.string().min(8).max(64).required(),
 });
 export const userSchema = Joi.object({
-  avatarURL: Joi.string().uri().required(),
+  avatar: Joi.any(),
   username: Joi.string().min(2).max(32).required(),
   email: Joi.string().pattern(emailPattern).max(64).required(),
   password: Joi.string().min(8).max(64).required(),

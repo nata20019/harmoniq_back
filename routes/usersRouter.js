@@ -13,7 +13,7 @@ usersRouter.patch(
   "/avatars",
   authenticate,
   upload.single("avatar"),
-  validateBody(updateUserAvatarSchema),
+  // validateBody(updateUserAvatarSchema),
   updateUserAvatar,
 );
 

@@ -4,7 +4,6 @@ export const createArticleSchema = Joi.object({
   title: Joi.string().min(3).max(100).required(),
   description: Joi.string().min(50).max(4000).required(),
   data: Joi.date().optional(),
-  owner: Joi.string().min(3).max(50).required(),
   category: Joi.string().min(4).max(50).optional(),
   favorite: Joi.boolean().optional(),
   image: Joi.string().optional(),
