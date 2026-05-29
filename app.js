@@ -13,7 +13,7 @@ app.use(morgan("tiny"));
 app.use(
   cors({
     origin: [
-      "http://localhost:3000", 
+      // "http://localhost:3000", 
       "https://nata20019.github.io" // Ваша адреса на GitHub Pages
     ],
     credentials: true, // Дозволяє надсилати куки
